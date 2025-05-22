@@ -1,0 +1,39 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dashboard PWA FCM</title>
+  <link rel="manifest" href="manifest.json">
+  <script src="firebase-messaging-sw.js"></script>
+</head>
+<body>
+  <h1>Notificações Push Ativadas</h1>
+  <button onclick="requestPermission()">🔔 Permitir Notificações</button>
+  <script type="module">
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js';
+    import { getMessaging, getToken } from 'https://www.gstatic.com/firebasejs/9.6.1/firebase-messaging.js';
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyA_Z2lDmN-3I_ivBx4hpWhO-Oyf4ybGufE",
+      authDomain: "dashboardalex.firebaseapp.com",
+      projectId: "dashboardalex",
+      storageBucket: "dashboardalex.appspot.com",
+      messagingSenderId: "467343097276",
+      appId: "1:467343097276:web:5b4d3c8e940057ee97ffb9",
+      measurementId: "G-349FG2DTV1"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const messaging = getMessaging(app);
+
+    async function requestPermission() {
+      try {
+        const token = await getToken(messaging, { vapidKey: 'BEUcDIEEJ0B9qa1BdmfyQwIiLoYspfyKs5gAmb_J5Tkz5jgAl22TB9ePH_ff1wcei5VoYtT7UigpLaShGtNIb-0' });
+        console.log("Token FCM:", token);
+      } catch (err) {
+        console.error("Erro ao obter token:", err);
+      }
+    }
+  </script>
+</body>
+</html>
